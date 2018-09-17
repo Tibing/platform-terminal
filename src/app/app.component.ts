@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-one-more-component',
-  template: '<span>This is one more component</span>',
+  template: '<box style="height: 10%; width: 40%">This is one more component</box>',
 })
 export class OneMoreComponent {
 }
@@ -10,7 +10,7 @@ export class OneMoreComponent {
 @Component({
   selector: 'app-root',
   template: `
-    <span>This is the AppRoot component!!!</span>
+    <box>This is the AppRoot componenbox</box>
     <app-one-more-component></app-one-more-component>
   `,
 })

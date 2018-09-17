@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppComponent, OneMoreComponent } from './app.component';
-import { InMemoryBrowserPlatform } from './console-renderer';
+import { BlessedPlatform } from './blessed-renderer';
 
 @NgModule({
   declarations: [
@@ -9,10 +9,11 @@ import { InMemoryBrowserPlatform } from './console-renderer';
     OneMoreComponent,
   ],
   imports: [
-    InMemoryBrowserPlatform,
+    BlessedPlatform,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [NO_ERRORS_SCHEMA],
 })
 export class AppModule {
 }
