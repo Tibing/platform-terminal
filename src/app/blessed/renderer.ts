@@ -1,5 +1,4 @@
-import { Injectable, NgModule, NO_ERRORS_SCHEMA, Renderer2, RendererFactory2, RendererStyleFlags2, RendererType2 } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { Injectable, Renderer2, RendererFactory2, RendererStyleFlags2, RendererType2 } from '@angular/core';
 import * as blessed from 'blessed';
 import { Widgets } from 'blessed';
 
@@ -162,15 +161,4 @@ export class BlessedRenderer implements Renderer2 {
   setValue(node: any, value: string): void {
     console.log('value', value);
   }
-}
-
-@NgModule({
-  imports: [BrowserModule],
-  exports: [BrowserModule],
-  providers: [
-    { provide: RendererFactory2, useClass: BlessedRendererFactory },
-  ],
-  schemas: [NO_ERRORS_SCHEMA],
-})
-export class BlessedPlatform {
 }
