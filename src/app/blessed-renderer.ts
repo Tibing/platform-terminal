@@ -1,15 +1,7 @@
-import {
-  APP_INITIALIZER,
-  Injectable,
-  NgModule,
-  NgZone, NO_ERRORS_SCHEMA,
-  Renderer2,
-  RendererFactory2,
-  RendererStyleFlags2,
-  RendererType2,
-} from '@angular/core';
+import { Injectable, NgModule, NO_ERRORS_SCHEMA, Renderer2, RendererFactory2, RendererStyleFlags2, RendererType2 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import * as blessed from 'blessed';
+import { Widgets } from 'blessed';
 
 let top = 10;
 
@@ -50,7 +42,7 @@ export class BlessedRenderer implements Renderer2 {
   readonly data: { [p: string]: any };
   destroyNode: ((node: any) => void) | null;
 
-  constructor(public root: any) {
+  constructor(public root: Widgets.Screen) {
     root.key(['escape', 'q', 'C-c'], function (ch, key) {
       return process.exit(0);
     });
@@ -58,7 +50,26 @@ export class BlessedRenderer implements Renderer2 {
 
   createElement(name: string, namespace?: string | null): any {
     top += 10;
-    console.log(top);
+    if (name === 'button') {
+      return blessed.button({
+        top: `${top}%`,
+        content: 'BUTTON',
+        width: 6,
+        height: 1,
+        tags: true,
+        style: {
+          fg: 'white',
+          bg: 'magenta',
+          border: {
+            fg: '#f0f0f0',
+          },
+          hover: {
+            bg: 'green',
+          },
+        },
+      });
+    }
+
     return blessed.box({
       top: `${top}%`,
       content: name,
@@ -111,6 +122,7 @@ export class BlessedRenderer implements Renderer2 {
   }
 
   listen(target: 'window' | 'document' | 'body' | any, eventName: string, callback: (event: any) => (boolean | void)): () => void {
+    target.on('click', callback);
     return function () {
     };
   }
@@ -134,20 +146,21 @@ export class BlessedRenderer implements Renderer2 {
   }
 
   setAttribute(el: any, name: string, value: string, namespace?: string | null): void {
-    console.log('========================================================================================');
-    console.log(name, value);
+    console.log('attribute', name, value);
   }
 
   setProperty(el: any, name: string, value: any): void {
-    console.log(name, value);
+    console.log('property', name, value);
   }
 
   setStyle(el: any, style: string, value: any, flags?: RendererStyleFlags2): void {
-    console.log(style, value);
+    el[style] = value;
+    el.render();
+    this.root.render();
   }
 
   setValue(node: any, value: string): void {
-    console.log(value);
+    console.log('value', value);
   }
 }
 
