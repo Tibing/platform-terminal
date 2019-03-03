@@ -16,7 +16,8 @@ const elementsFactory: Map<string, ElementFactory> = new Map()
   .set('list', listFactory)
   .set('textbox', blessed.textbox)
   .set('loading', blessed.loading)
-  .set('progressbar', progressBarFactory);
+  .set('progressbar', progressBarFactory)
+  .set('form', blessed.form);
 
 let top = 0;
 

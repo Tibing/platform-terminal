@@ -29,17 +29,14 @@ export class BlessedRenderer implements Renderer2 {
 
   createText(value: string): any {
     // return new Text(value);
-    console.log(`create text: ${value}`);
     return this.viewUtil.createElement('text', { content: value });
   }
 
   selectRootElement(): Widgets.Screen {
-    console.log('select root elemnt');
     return this.viewUtil.selectRootElement();
   }
 
   addClass(el: any, name: string): void {
-    console.log(`add class: ${name}`);
   }
 
   appendChild(parent: Widgets.BlessedElement, newChild: Widgets.BlessedElement): void {
@@ -50,14 +47,12 @@ export class BlessedRenderer implements Renderer2 {
   }
 
   createComment(value: string): any {
-    console.log(`create comment: ${value}`);
   }
 
   destroy(): void {
   }
 
   insertBefore(parent: any, newChild: any, refChild: any): void {
-    // console.log('insertBefore', parent, newChild, refChild);
   }
 
   listen(target: 'window' | 'document' | 'body' | any, eventName: string, callback: (event: any) => (boolean | void)): () => void {
@@ -91,6 +86,9 @@ export class BlessedRenderer implements Renderer2 {
   }
 
   setProperty(el: Widgets.BlessedElement, name: string, value: any): void {
+    if (name === 'styles') {
+      name = 'style';
+    }
     el[name] = value;
     el.render();
     this.viewUtil.selectRootElement().render();

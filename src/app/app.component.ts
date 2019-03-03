@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Widgets } from 'blessed';
 
 @Component({
   selector: 'app-one-more-component',
@@ -13,23 +14,46 @@ export class OneMoreComponent {
 @Component({
   selector: 'app-root',
   template: `
-    <progressbar [filled]="left" [pch]="'_'"></progressbar>
+    <form #form (submit)="submitForm($event)" [keys]="true" [width]="30" [height]="4" bg="green">
+      Submit or cancel?
+      {{ submitted ? 'Submit' : 'Cancel' }}
+
+      <button
+        (click)="submit()"
+        [keys]="true"
+        [left]="10"
+        [top]="2"
+        [styles]="stubmitStyles">
+        Submit
+      </button>
+
+      <button
+      (click)="cancel()"
+      [keys]="true"
+      [left]="30"
+      [top]="2"
+      [styles]="stubmitStyles">
+      Cancel
+      </button>
+
+    </form>
   `,
 })
 export class AppComponent {
-  items = ['Item 1'];
-  left = 10;
+  @ViewChild('form') el: ElementRef<Widgets.FormElement<any>>;
+  submitted = false;
 
-  constructor() {
-    this.go();
+  stubmitStyles = { bg: 'blue', focus: { bg: 'red' }, hover: { bg: 'red' } };
+
+  submit() {
+    this.el.nativeElement.submit();
   }
 
-  go() {
-    setTimeout(() => {
-      const newItem = `Item: ${this.items.length + 1}`;
-      this.items = [...this.items, newItem];
-      this.left += 10;
-      this.go();
-    }, 1000);
+  cancel() {
+    this.el.nativeElement.cancel();
+  }
+
+  submitForm(event) {
+    debugger;
   }
 }
