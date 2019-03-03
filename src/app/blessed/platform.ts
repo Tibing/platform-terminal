@@ -3,7 +3,7 @@ import { ɵplatformCoreDynamic as platformCoreDynamic } from '@angular/platform-
 import { BootstrapOptions } from '@angular/core/src/application_ref';
 import { DOCUMENT } from '@angular/common';
 
-const platformFactory = createPlatformFactory(platformCoreDynamic, 'consoleDynamic', [
+const platformFactory = createPlatformFactory(platformCoreDynamic, 'blessedDynamic', [
   { provide: DOCUMENT, useValue: {} },
 ]);
 
