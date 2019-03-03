@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run build && node dist/src/main.js",
+    "debug": "npm run build && node --inspect-brk dist/src/main.js",
     "build": "ngc -p src/tsconfig.app.json",
     "test": "ng test",
     "lint": "ng lint",

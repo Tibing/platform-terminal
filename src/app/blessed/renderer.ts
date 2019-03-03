@@ -1,7 +1,7 @@
 import { Injectable, Renderer2, RendererFactory2, RendererStyleFlags2, RendererType2 } from '@angular/core';
+import { Widgets } from 'blessed';
 
 import { ViewUtil } from './view-util';
-import { Widgets } from 'blessed';
 
 @Injectable()
 export class BlessedRendererFactory implements RendererFactory2 {
@@ -29,24 +29,28 @@ export class BlessedRenderer implements Renderer2 {
 
   createText(value: string): any {
     // return new Text(value);
-    return null;
+    console.log(`create text: ${value}`);
+    return this.viewUtil.createElement('text', { content: value });
   }
 
   selectRootElement(): Widgets.Screen {
+    console.log('select root elemnt');
     return this.viewUtil.selectRootElement();
   }
 
   addClass(el: any, name: string): void {
+    console.log(`add class: ${name}`);
   }
 
-  appendChild(parent: any, newChild: any): void {
+  appendChild(parent: Widgets.BlessedElement, newChild: Widgets.BlessedElement): void {
     if (newChild) {
-      this.viewUtil.selectRootElement().append(newChild);
+      parent.append(newChild);
       this.viewUtil.selectRootElement().render();
     }
   }
 
   createComment(value: string): any {
+    console.log(`create comment: ${value}`);
   }
 
   destroy(): void {
@@ -80,21 +84,26 @@ export class BlessedRenderer implements Renderer2 {
   removeStyle(el: any, style: string, flags?: RendererStyleFlags2): void {
   }
 
-  setAttribute(el: any, name: string, value: string, namespace?: string | null): void {
-    console.log('attribute', name, value);
+  setAttribute(el: Widgets.BlessedElement, name: string, value: string, namespace?: string | null): void {
+    el[name] = value;
+    el.render();
+    this.viewUtil.selectRootElement().render();
   }
 
-  setProperty(el: any, name: string, value: any): void {
-    console.log('property', name, value);
+  setProperty(el: Widgets.BlessedElement, name: string, value: any): void {
+    el[name] = value;
+    el.render();
+    this.viewUtil.selectRootElement().render();
   }
 
-  setStyle(el: any, style: string, value: any, flags?: RendererStyleFlags2): void {
+  setStyle(el: Widgets.BlessedElement, style: string, value: any, flags?: RendererStyleFlags2): void {
     el[style] = value;
     el.render();
     this.viewUtil.selectRootElement().render();
   }
 
-  setValue(node: any, value: string): void {
-    console.log('value', value);
+  setValue(node: Widgets.BlessedElement, value: string): void {
+    node.setContent(value);
+    this.viewUtil.selectRootElement().render();
   }
 }

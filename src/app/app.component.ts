@@ -1,43 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-one-more-component',
   template: `
+    {{ items }}
   `,
 })
 export class OneMoreComponent {
+  @Input() items;
 }
 
 @Component({
   selector: 'app-root',
   template: `
-    <button (click)="onClick()"></button>
-    <box [style.aleft]="left">This is one more component</box>
+    <progressbar [filled]="left" [pch]="'_'"></progressbar>
   `,
 })
 export class AppComponent {
-  left = 0;
-  interval;
-  private inc = false;
+  items = ['Item 1'];
+  left = 10;
 
-  onClick() {
-    if (this.interval) {
-      clearInterval(this.interval);
-    } else {
-      this.interval = setInterval(() => {
-        if (this.left === 200) {
-          this.inc = true;
-        }
-        if (this.left === 0) {
-          this.inc = false;
-        }
+  constructor() {
+    this.go();
+  }
 
-        if (this.inc) {
-          this.left -= 10;
-        } else {
-          this.left += 10;
-        }
-      }, 300);
-    }
+  go() {
+    setTimeout(() => {
+      const newItem = `Item: ${this.items.length + 1}`;
+      this.items = [...this.items, newItem];
+      this.left += 10;
+      this.go();
+    }, 1000);
   }
 }
