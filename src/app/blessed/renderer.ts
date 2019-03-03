@@ -1,35 +1,14 @@
 import { Injectable, Renderer2, RendererFactory2, RendererStyleFlags2, RendererType2 } from '@angular/core';
-import * as blessed from 'blessed';
+
+import { ViewUtil } from './view-util';
 import { Widgets } from 'blessed';
-
-let top = 10;
-
-export class View {
-  children: Node[] = [];
-}
-
-export class Element {
-  view: View = null;
-  children: Node[] = [];
-
-  constructor(public name: string) {
-  }
-}
-
-export class Text {
-  constructor(public value: string) {
-  }
-}
-
-export type Node = Element | View | Text;
 
 @Injectable()
 export class BlessedRendererFactory implements RendererFactory2 {
-  readonly root = blessed.screen({ smartCSR: true, title: 'This is base title!!!' });
   protected renderer: Renderer2;
 
-  constructor() {
-    this.renderer = new BlessedRenderer(this.root);
+  constructor(viewUtil: ViewUtil) {
+    this.renderer = new BlessedRenderer(viewUtil);
   }
 
   createRenderer(hostElement: any, type: RendererType2 | null): Renderer2 {
@@ -41,54 +20,11 @@ export class BlessedRenderer implements Renderer2 {
   readonly data: { [p: string]: any };
   destroyNode: ((node: any) => void) | null;
 
-  constructor(public root: Widgets.Screen) {
-    root.key(['escape', 'q', 'C-c'], function (ch, key) {
-      return process.exit(0);
-    });
+  constructor(private viewUtil: ViewUtil) {
   }
 
   createElement(name: string, namespace?: string | null): any {
-    top += 10;
-    if (name === 'button') {
-      return blessed.button({
-        top: `${top}%`,
-        content: 'BUTTON',
-        width: 6,
-        height: 1,
-        tags: true,
-        style: {
-          fg: 'white',
-          bg: 'magenta',
-          border: {
-            fg: '#f0f0f0',
-          },
-          hover: {
-            bg: 'green',
-          },
-        },
-      });
-    }
-
-    return blessed.box({
-      top: `${top}%`,
-      content: name,
-      width: 30,
-      height: 10,
-      tags: true,
-      border: {
-        type: 'line',
-      },
-      style: {
-        fg: 'white',
-        bg: 'magenta',
-        border: {
-          fg: '#f0f0f0',
-        },
-        hover: {
-          bg: 'green',
-        },
-      },
-    });
+    return this.viewUtil.createElement(name);
   }
 
   createText(value: string): any {
@@ -96,8 +32,8 @@ export class BlessedRenderer implements Renderer2 {
     return null;
   }
 
-  selectRootElement(selectorOrNode: string | any): any {
-    return this.root;
+  selectRootElement(): Widgets.Screen {
+    return this.viewUtil.selectRootElement();
   }
 
   addClass(el: any, name: string): void {
@@ -105,8 +41,8 @@ export class BlessedRenderer implements Renderer2 {
 
   appendChild(parent: any, newChild: any): void {
     if (newChild) {
-      this.root.append(newChild);
-      this.root.render();
+      this.viewUtil.selectRootElement().append(newChild);
+      this.viewUtil.selectRootElement().render();
     }
   }
 
@@ -155,7 +91,7 @@ export class BlessedRenderer implements Renderer2 {
   setStyle(el: any, style: string, value: any, flags?: RendererStyleFlags2): void {
     el[style] = value;
     el.render();
-    this.root.render();
+    this.viewUtil.selectRootElement().render();
   }
 
   setValue(node: any, value: string): void {
