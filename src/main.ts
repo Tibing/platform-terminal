@@ -1,4 +1,4 @@
-import './app/zone-nativescript';
+import 'zone.js/dist/zone-node';
 import { enableProdMode } from '@angular/core';
 
 import { AppModule } from './app/app.module';
