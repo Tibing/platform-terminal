@@ -6,9 +6,13 @@ import { ElementSchemaRegistry } from '@angular/compiler';
 import { BlessedElementSchemaRegistry } from './schema-registry';
 import { BlessedSanitizer } from './sanitizer';
 
-export const platformBlessedDynamic = createPlatformFactory(platformCoreDynamic, 'blessedDynamic', [
+
+const COMMON_PROVIDERS = [
   { provide: DOCUMENT, useValue: {} },
   { provide: Sanitizer, useClass: BlessedSanitizer, deps: [] },
+];
+
+const COMPILER_PROVIDERS = [
   {
     provide: COMPILER_OPTIONS,
     useValue: {
@@ -18,4 +22,7 @@ export const platformBlessedDynamic = createPlatformFactory(platformCoreDynamic,
     },
     multi: true,
   },
-]);
+];
+
+export const platformBlessedDynamic = createPlatformFactory(platformCoreDynamic,
+  'blessedDynamic', [...COMMON_PROVIDERS, ...COMPILER_PROVIDERS]);

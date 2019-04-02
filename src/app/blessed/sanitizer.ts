@@ -5,4 +5,3 @@ export class BlessedSanitizer extends Sanitizer {
     return value;
   }
 }
-
