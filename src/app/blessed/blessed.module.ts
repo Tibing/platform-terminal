@@ -1,5 +1,4 @@
-import { ErrorHandler, NgModule, NO_ERRORS_SCHEMA, RendererFactory2 } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { ApplicationModule, ErrorHandler, NgModule, NO_ERRORS_SCHEMA, RendererFactory2 } from '@angular/core';
 
 import { BlessedRendererFactory } from './renderer';
 import { Screen, SCREEN_TITLE } from './screen';
@@ -7,8 +6,8 @@ import { ViewUtil } from './view-util';
 import { BlessedErrorHandler } from './error-handler';
 
 @NgModule({
-  imports: [BrowserModule],
-  exports: [BrowserModule],
+  imports: [ApplicationModule],
+  exports: [ApplicationModule],
   providers: [
     Screen,
     ViewUtil,

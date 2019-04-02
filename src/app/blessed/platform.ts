@@ -1,10 +1,26 @@
-import { CompilerOptions, createPlatformFactory, NgModuleFactory, NgModuleRef, PlatformRef, Type } from '@angular/core';
+import {
+  CompilerOptions,
+  createPlatformFactory,
+  NgModuleFactory,
+  NgModuleRef,
+  PlatformRef,
+  Sanitizer,
+  SecurityContext,
+  Type,
+} from '@angular/core';
 import { ɵplatformCoreDynamic as platformCoreDynamic } from '@angular/platform-browser-dynamic';
 import { BootstrapOptions } from '@angular/core/src/application_ref';
 import { DOCUMENT } from '@angular/common';
 
+export class BlessedSanitizer extends Sanitizer {
+  sanitize(context: SecurityContext, value: string): string {
+    return value;
+  }
+}
+
 const platformFactory = createPlatformFactory(platformCoreDynamic, 'blessedDynamic', [
   { provide: DOCUMENT, useValue: {} },
+  { provide: Sanitizer, useClass: BlessedSanitizer, deps: [] },
 ]);
 
 export class BlessedPlatformRef extends PlatformRef {

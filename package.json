@@ -19,7 +19,7 @@
     "@angular/forms": "^6.0.3",
     "@angular/http": "^6.0.3",
     "@angular/platform-browser": "^6.0.3",
-    "@angular/platform-browser-dynamic": "^6.0.3",
+    "@angular/platform-browser-dynamic": "^6.1.10",
     "@angular/router": "^6.0.3",
     "@types/blessed": "^0.1.10",
     "blessed": "^0.1.81",
