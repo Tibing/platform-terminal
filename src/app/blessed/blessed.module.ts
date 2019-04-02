@@ -1,4 +1,4 @@
-import { ApplicationModule, ErrorHandler, NgModule, NO_ERRORS_SCHEMA, RendererFactory2 } from '@angular/core';
+import { ApplicationModule, ErrorHandler, NgModule, RendererFactory2 } from '@angular/core';
 
 import { BlessedRendererFactory } from './renderer';
 import { Screen, SCREEN_TITLE } from './screen';
@@ -15,7 +15,6 @@ import { BlessedErrorHandler } from './error-handler';
     { provide: RendererFactory2, useClass: BlessedRendererFactory },
     { provide: ErrorHandler, useClass: BlessedErrorHandler },
   ],
-  schemas: [NO_ERRORS_SCHEMA],
 })
 export class BlessedModule {
 }

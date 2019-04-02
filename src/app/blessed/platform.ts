@@ -1,4 +1,5 @@
 import {
+  COMPILER_OPTIONS,
   CompilerOptions,
   createPlatformFactory,
   NgModuleFactory,
@@ -11,6 +12,8 @@ import {
 import { ɵplatformCoreDynamic as platformCoreDynamic } from '@angular/platform-browser-dynamic';
 import { BootstrapOptions } from '@angular/core/src/application_ref';
 import { DOCUMENT } from '@angular/common';
+import { ElementSchemaRegistry } from '@angular/compiler';
+import { BlessedElementSchemaRegistry } from './schema-registry';
 
 export class BlessedSanitizer extends Sanitizer {
   sanitize(context: SecurityContext, value: string): string {
@@ -21,6 +24,15 @@ export class BlessedSanitizer extends Sanitizer {
 const platformFactory = createPlatformFactory(platformCoreDynamic, 'blessedDynamic', [
   { provide: DOCUMENT, useValue: {} },
   { provide: Sanitizer, useClass: BlessedSanitizer, deps: [] },
+  {
+    provide: COMPILER_OPTIONS,
+    useValue: {
+      providers: [
+        { provide: ElementSchemaRegistry, useClass: BlessedElementSchemaRegistry, deps: [] },
+      ],
+    },
+    multi: true,
+  },
 ]);
 
 export class BlessedPlatformRef extends PlatformRef {
