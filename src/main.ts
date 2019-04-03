@@ -3,11 +3,11 @@ import { enableProdMode } from '@angular/core';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { platformBlessedDynamic } from './app/blessed/platform';
+import { platformTerminalDynamic } from './app/terminal/platform';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBlessedDynamic().bootstrapModule(AppModule)
+platformTerminalDynamic().bootstrapModule(AppModule)
   .catch(console.error.bind(console));

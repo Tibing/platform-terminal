@@ -4,11 +4,11 @@ import { Widgets } from 'blessed';
 import { ViewUtil } from './view-util';
 
 @Injectable()
-export class BlessedRendererFactory implements RendererFactory2 {
+export class TerminalRendererFactory implements RendererFactory2 {
   protected renderer: Renderer2;
 
   constructor(viewUtil: ViewUtil) {
-    this.renderer = new BlessedRenderer(viewUtil);
+    this.renderer = new TerminalRenderer(viewUtil);
   }
 
   createRenderer(hostElement: any, type: RendererType2 | null): Renderer2 {
@@ -16,7 +16,7 @@ export class BlessedRendererFactory implements RendererFactory2 {
   }
 }
 
-export class BlessedRenderer implements Renderer2 {
+export class TerminalRenderer implements Renderer2 {
   readonly data: { [p: string]: any };
   destroyNode: ((node: any) => void) | null;
 

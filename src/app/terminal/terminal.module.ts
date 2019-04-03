@@ -1,9 +1,9 @@
 import { ApplicationModule, ErrorHandler, NgModule, RendererFactory2 } from '@angular/core';
 
-import { BlessedRendererFactory } from './renderer';
+import { TerminalRendererFactory } from './renderer';
 import { Screen, SCREEN_TITLE } from './screen';
 import { ViewUtil } from './view-util';
-import { BlessedErrorHandler } from './error-handler';
+import { TerminalErrorHandler } from './error-handler';
 
 @NgModule({
   imports: [ApplicationModule],
@@ -12,9 +12,9 @@ import { BlessedErrorHandler } from './error-handler';
     Screen,
     ViewUtil,
     { provide: SCREEN_TITLE, useValue: 'My Application' },
-    { provide: RendererFactory2, useClass: BlessedRendererFactory },
-    { provide: ErrorHandler, useClass: BlessedErrorHandler },
+    { provide: RendererFactory2, useClass: TerminalRendererFactory },
+    { provide: ErrorHandler, useClass: TerminalErrorHandler },
   ],
 })
-export class BlessedModule {
+export class TerminalModule {
 }

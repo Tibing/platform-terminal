@@ -1,7 +1,7 @@
 import { ElementSchemaRegistry } from '@angular/compiler';
 import { SchemaMetadata, SecurityContext } from '@angular/core';
 
-export class BlessedElementSchemaRegistry extends ElementSchemaRegistry {
+export class TerminalElementSchemaRegistry extends ElementSchemaRegistry {
   hasProperty(_tagName: string, _propName: string): boolean {
     return true;
   }

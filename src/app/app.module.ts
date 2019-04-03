@@ -1,7 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppComponent, OneMoreComponent } from './app.component';
-import { BlessedModule } from './blessed/blessed.module';
+import { TerminalModule } from './terminal/terminal.module';
 
 @NgModule({
   declarations: [
@@ -9,7 +9,7 @@ import { BlessedModule } from './blessed/blessed.module';
     OneMoreComponent,
   ],
   imports: [
-    BlessedModule,
+    TerminalModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
