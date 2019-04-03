@@ -88,8 +88,11 @@ export class TerminalRenderer implements Renderer2 {
   setProperty(el: Widgets.BlessedElement, name: string, value: any): void {
     if (name === 'styles') {
       name = 'style';
+    } else if (name === 'data') {
+      (<any>el).setData(value);
+    } else {
+      el[name] = value;
     }
-    el[name] = value;
     el.render();
     this.viewUtil.selectRootElement().render();
   }

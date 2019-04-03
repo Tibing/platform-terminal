@@ -9,34 +9,6 @@ var screen = blessed.screen();
 
 var grid = new contrib.grid({ rows: 12, cols: 12, screen: screen });
 
-
-/**
- * Donut Options
- self.options.radius = options.radius || 14; // how wide is it? over 5 is best
- self.options.arcWidth = options.arcWidth || 4; //width of the donut
- self.options.yPadding = options.yPadding || 2; //padding from the top
- */
-// var donut = grid.set(8, 8, 4, 2, contrib.donut,
-//   {
-//     label: 'Percent Donut',
-//     radius: 16,
-//     arcWidth: 4,
-//     yPadding: 2,
-//     data: [ { label: 'Storage', percent: 87 } ]
-//   })
-
-// var latencyLine = grid.set(8, 8, 4, 2, contrib.line,
-//   { style:
-//     { line: "yellow"
-//     , text: "green"
-//     , baseline: "black"}
-//   , xLabelPadding: 3
-//   , xPadding: 5
-//   , label: 'Network Latency (sec)'})
-
-// var gauge = grid.set(8, 10, 2, 2, contrib.gauge, { label: 'Storage', percent: [ 80, 20 ] })
-// var gauge_two = grid.set(2, 9, 2, 3, contrib.gauge, { label: 'Deployment Progress', percent: 80 })
-
 var sparkline = grid.set(6, 9, 6, 3, contrib.sparkline,
   {
     label: 'Throughput (bits/sec)'
@@ -62,47 +34,6 @@ var table = grid.set(3, 0, 3, 6, contrib.table,
     , columnWidth: [ 28, 20, 20 ]
   });
 
-/*
- *
- * LCD Options
-//these options need to be modified epending on the resulting positioning/size
-  options.segmentWidth = options.segmentWidth || 0.06; // how wide are the segments in % so 50% = 0.5
-  options.segmentInterval = options.segmentInterval || 0.11; // spacing between the segments in % so 50% = 0.5
-  options.strokeWidth = options.strokeWidth || 0.11; // spacing between the segments in % so 50% = 0.5
-//default display settings
-  options.elements = options.elements || 3; // how many elements in the display. or how many characters can be displayed.
-  options.display = options.display || 321; // what should be displayed before anything is set
-  options.elementSpacing = options.spacing || 4; // spacing between each element
-  options.elementPadding = options.padding || 2; // how far away from the edges to put the elements
-//coloring
-  options.color = options.color || "white";
-*/
-// var lcdLineOne = grid.set(0, 9, 2, 3, contrib.lcd,
-//   {
-//     label: 'LCD Test',
-//     segmentWidth: 0.06,
-//     segmentInterval: 0.11,
-//     strokeWidth: 0.1,
-//     elements: 5,
-//     display: 3210,
-//     elementSpacing: 4,
-//     elementPadding: 2
-//   }
-// );
-//
-// var errorsLine = grid.set(0, 6, 4, 3, contrib.line,
-//   {
-//     style:
-//       {
-//         line: 'red'
-//         , text: 'white'
-//         , baseline: 'black'
-//       }
-//     , label: 'Errors Rate'
-//     , maxY: 60
-//     , showLegend: true
-//   })
-
 var transactionsLine = grid.set(0, 0, 3, 3, contrib.line,
   {
     showNthLabel: 5
@@ -123,33 +54,10 @@ var transactionsLine1 = grid.set(0, 6, 6, 6, contrib.line,
 
 var map = grid.set(6, 0, 6, 9, contrib.map, { label: 'Servers Location' });
 
-// var log = grid.set(8, 6, 4, 2, contrib.log,
-//   {
-//     fg: 'green'
-//     , selectedFg: 'green'
-//     , label: 'Server Log'
-//   })
-
-
 //dummy data
 var servers = [ 'US1', 'US2', 'EU1', 'AU1' ];
 var commands = [ 'grep', 'node', 'java', 'timer', '~/ls -l', 'netns', 'watchdog', 'gulp', 'tar -xvf', 'awk', 'npm install' ];
 
-
-//set dummy data on gauge
-// var gauge_percent = 0
-// setInterval(function () {
-//   gauge.setData([ gauge_percent, 100 - gauge_percent ]);
-//   gauge_percent++;
-//   if (gauge_percent >= 100) gauge_percent = 0
-// }, 200)
-
-// var gauge_percent_two = 0
-// setInterval(function () {
-//   gauge_two.setData(gauge_percent_two);
-//   gauge_percent_two++;
-//   if (gauge_percent_two >= 100) gauge_percent_two = 0
-// }, 200);
 
 
 // set dummy data on bar chart
@@ -185,18 +93,6 @@ generateTable();
 table.focus();
 setInterval(generateTable, 3000);
 
-
-//set log dummy data
-// setInterval(function () {
-//   var rnd = Math.round(Math.random() * 2)
-//   if (rnd == 0) log.log('starting process ' + commands[ Math.round(Math.random() * (commands.length - 1)) ])
-//   else if (rnd == 1) log.log('terminating server ' + servers[ Math.round(Math.random() * (servers.length - 1)) ])
-//   else if (rnd == 2) log.log('avg. wait time ' + Math.random().toFixed(2))
-//   screen.render()
-// }, 500)
-//
-//
-//set spark dummy data
 var spark1 = [ 1, 2, 5, 2, 1, 5, 1, 2, 5, 2, 1, 5, 4, 4, 5, 4, 1, 5, 1, 2, 5, 2, 1, 5, 1, 2, 5, 2, 1, 5, 1, 2, 5, 2, 1, 5 ];
 var spark2 = [ 4, 4, 5, 4, 1, 5, 1, 2, 5, 2, 1, 5, 4, 4, 5, 4, 1, 5, 1, 2, 5, 2, 1, 5, 1, 2, 5, 2, 1, 5, 1, 2, 5, 2, 1, 5 ];
 var spark3 = [ 1, 2, 5, 2, 1, 5, 1, 2, 5, 2, 1, 5, 4, 4, 5, 4, 1, 5, 1, 2, 5, 2, 1, 5, 1, 2, 5, 2, 1, 5, 1, 2, 5, 2, 1, 5 ];
@@ -274,51 +170,13 @@ var latencyData = {
 
 setLineData([ transactionsData, transactionsData1 ], transactionsLine);
 setLineData([ transactionsData, transactionsData1 ], transactionsLine1);
-// setLineData([ errorsData ], errorsLine)
-// setLineData([latencyData], latencyLine)
 
 setInterval(function () {
   setLineData([ transactionsData, transactionsData1 ], transactionsLine);
   setLineData([ transactionsData, transactionsData1 ], transactionsLine1);
   screen.render()
 }, 500);
-//
-// setInterval(function () {
-//   setLineData([ errorsData ], errorsLine)
-// }, 1500)
-//
-// setInterval(function () {
-//   var colors = [ 'green', 'magenta', 'cyan', 'red', 'blue' ];
-//   var text = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L' ];
-//
-//   var value = Math.round(Math.random() * 100);
-//   lcdLineOne.setDisplay(value + text[ value % 12 ]);
-//   lcdLineOne.setOptions({
-//     color: colors[ value % 5 ],
-//     elementPadding: 4
-//   });
-//   screen.render()
-// }, 1500);
-//
-// var pct = 0.00;
-//
-// function updateDonut() {
-//   if (pct > 0.99) pct = 0.00;
-//   var color = 'green';
-//   if (pct >= 0.25) color = 'cyan';
-//   if (pct >= 0.5) color = 'yellow';
-//   if (pct >= 0.75) color = 'red';
-//   donut.setData([
-//     { percent: parseFloat((pct + 0.00) % 1).toFixed(2), label: 'storage', 'color': color }
-//   ]);
-//   pct += 0.01;
-// }
-//
-// setInterval(function () {
-//   updateDonut();
-//   screen.render()
-// }, 500)
-//
+
 function setLineData(mockData, line) {
   for (var i = 0; i < mockData.length; i++) {
     var last = mockData[ i ].y[ mockData[ i ].y.length - 1 ];
@@ -336,17 +194,11 @@ screen.key([ 'escape', 'q', 'C-c' ], function (ch, key) {
 });
 
 screen.on('resize', function () {
-  // donut.emit('attach');
-  // gauge.emit('attach');
-  // gauge_two.emit('attach');
   sparkline.emit('attach');
   bar.emit('attach');
   table.emit('attach');
-  // lcdLineOne.emit('attach');
-  // errorsLine.emit('attach');
   transactionsLine.emit('attach');
   map.emit('attach');
-  // log.emit('attach');
 });
 
 screen.render();

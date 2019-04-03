@@ -1,25 +1,14 @@
 import { Injectable } from '@angular/core';
-import * as blessed from 'blessed';
 import { Widgets } from 'blessed';
+import * as contrib from 'blessed-contrib';
 import { List } from 'blessed/lib/widgets/list';
 
 import { Screen } from './screen';
-import { listFactory } from './view-adapters/list-adapter';
-import { progressBarFactory } from './view-adapters/progress-bar-adapter';
 
 type ElementFactory = (any) => Widgets.BoxElement;
 
 const elementsFactory: Map<string, ElementFactory> = new Map()
-  .set('button', blessed.button)
-  .set('box', blessed.box)
-  .set('text', blessed.text)
-  .set('list', listFactory)
-  .set('textbox', blessed.textbox)
-  .set('loading', blessed.loading)
-  .set('progressbar', progressBarFactory)
-  .set('form', blessed.form);
-
-let top = 0;
+  .set('line', contrib.line);
 
 @Injectable()
 export class ViewUtil {
@@ -27,12 +16,8 @@ export class ViewUtil {
   }
 
   createElement(name: string, options: any = {}): Widgets.BoxElement {
-    let elementFactory: ElementFactory = elementsFactory.get(name);
-    if (!elementFactory) {
-      elementFactory = elementsFactory.get('box');
-    }
-    top += 2;
-    return elementFactory({ top: `${top}%`, ...options });
+    const elementFactory: ElementFactory = elementsFactory.get(name);
+    return elementFactory(options);
   }
 
   selectRootElement(): Widgets.Screen {
