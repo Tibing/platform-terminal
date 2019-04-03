@@ -1,14 +1,19 @@
 import { Injectable, Renderer2, RendererFactory2, RendererStyleFlags2, RendererType2 } from '@angular/core';
 import { Widgets } from 'blessed';
 
-import { ViewUtil } from './view-util';
+import { Screen } from './screen';
+
 
 @Injectable()
 export class TerminalRendererFactory implements RendererFactory2 {
   protected renderer: Renderer2;
 
-  constructor(viewUtil: ViewUtil) {
-    this.renderer = new TerminalRenderer(viewUtil);
+  constructor(private screen: Screen) {
+    this.renderer = new TerminalRenderer(screen);
+  }
+
+  end() {
+    this.screen.selectRootElement().render();
   }
 
   createRenderer(hostElement: any, type: RendererType2 | null): Renderer2 {
@@ -20,20 +25,19 @@ export class TerminalRenderer implements Renderer2 {
   readonly data: { [p: string]: any };
   destroyNode: ((node: any) => void) | null;
 
-  constructor(private viewUtil: ViewUtil) {
+  constructor(private screen: Screen) {
   }
 
   createElement(name: string, namespace?: string | null): any {
-    return this.viewUtil.createElement(name);
+    return this.screen.createElement(name);
   }
 
   createText(value: string): any {
-    // return new Text(value);
-    return this.viewUtil.createElement('text', { content: value });
+    return this.screen.createElement('text', { content: value });
   }
 
   selectRootElement(): Widgets.Screen {
-    return this.viewUtil.selectRootElement();
+    return this.screen.selectRootElement();
   }
 
   addClass(el: any, name: string): void {
@@ -42,7 +46,6 @@ export class TerminalRenderer implements Renderer2 {
   appendChild(parent: Widgets.BlessedElement, newChild: Widgets.BlessedElement): void {
     if (newChild) {
       parent.append(newChild);
-      this.viewUtil.selectRootElement().render();
     }
   }
 
@@ -81,8 +84,6 @@ export class TerminalRenderer implements Renderer2 {
 
   setAttribute(el: Widgets.BlessedElement, name: string, value: string, namespace?: string | null): void {
     el[name] = value;
-    el.render();
-    this.viewUtil.selectRootElement().render();
   }
 
   setProperty(el: Widgets.BlessedElement, name: string, value: any): void {
@@ -93,18 +94,13 @@ export class TerminalRenderer implements Renderer2 {
     } else {
       el[name] = value;
     }
-    el.render();
-    this.viewUtil.selectRootElement().render();
   }
 
   setStyle(el: Widgets.BlessedElement, style: string, value: any, flags?: RendererStyleFlags2): void {
     el[style] = value;
-    el.render();
-    this.viewUtil.selectRootElement().render();
   }
 
   setValue(node: Widgets.BlessedElement, value: string): void {
     node.setContent(value);
-    this.viewUtil.selectRootElement().render();
   }
 }

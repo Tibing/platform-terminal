@@ -1,23 +1,32 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as blessed from 'blessed';
 import { Widgets } from 'blessed';
+import * as contrib from 'blessed-contrib';
 
-export const SCREEN_TITLE: InjectionToken<string> = new InjectionToken('screen title');
+type ElementFactory = (any) => Widgets.BoxElement;
+
+const elementsFactory: Map<string, ElementFactory> = new Map()
+  .set('line', contrib.line);
 
 @Injectable()
 export class Screen {
   private screen: Widgets.Screen;
 
-  constructor(@Inject(SCREEN_TITLE) private title: string) {
+  constructor() {
     this.init();
   }
 
-  instance(): Widgets.Screen {
+  createElement(name: string, options: any = {}): Widgets.BoxElement {
+    const elementFactory: ElementFactory = elementsFactory.get(name);
+    return elementFactory(options);
+  }
+
+  selectRootElement(): Widgets.Screen {
     return this.screen;
   }
 
   private init() {
-    this.screen = blessed.screen({ smartCSR: true, title: this.title });
+    this.screen = blessed.screen({ smartCSR: true });
     this.setupExitListener();
   }
 
