@@ -5,11 +5,10 @@ import { Screen } from './screen';
 import { TerminalErrorHandler } from './error-handler';
 
 @NgModule({
-  imports: [ApplicationModule],
   exports: [ApplicationModule],
   providers: [
     Screen,
-    { provide: RendererFactory2, useClass: TerminalRendererFactory },
+    { provide: RendererFactory2, useClass: TerminalRendererFactory, deps: [Screen] },
     { provide: ErrorHandler, useClass: TerminalErrorHandler },
   ],
 })

@@ -13,7 +13,9 @@ import { TransactionsService } from './transactions.service';
     TerminalModule,
     CommonModule,
   ],
-  providers: [TransactionsService],
+  providers: [
+    TransactionsService,
+  ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA],
 })

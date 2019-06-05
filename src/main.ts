@@ -1,5 +1,6 @@
+import 'core-js/es7/reflect';
 import 'zone.js/dist/zone-node';
-import { enableProdMode } from '@angular/core';
+import { enableProdMode, PlatformRef } from '@angular/core';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
@@ -9,5 +10,6 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformTerminalDynamic().bootstrapModule(AppModule)
+const ref: PlatformRef = platformTerminalDynamic();
+ref.bootstrapModule(AppModule)
   .catch(console.error.bind(console));
