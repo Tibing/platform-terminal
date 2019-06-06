@@ -6,6 +6,9 @@ import * as contrib from 'blessed-contrib';
 type ElementFactory = (any) => Widgets.BoxElement;
 
 const elementsFactory: Map<string, ElementFactory> = new Map()
+  .set('text', blessed.text)
+  .set('box', blessed.box)
+  .set('table', blessed.table)
   .set('line', contrib.line);
 
 @Injectable()
@@ -17,7 +20,12 @@ export class Screen {
   }
 
   createElement(name: string, options: any = {}): Widgets.BoxElement {
-    const elementFactory: ElementFactory = elementsFactory.get(name);
+    let elementFactory: ElementFactory = elementsFactory.get(name);
+
+    if (!elementFactory) {
+      elementFactory = elementsFactory.get('box');
+    }
+
     return elementFactory(options);
   }
 
