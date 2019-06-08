@@ -1,5 +1,6 @@
 import { Injectable, Renderer2, RendererFactory2, RendererStyleFlags2, RendererType2 } from '@angular/core';
 import { Widgets } from 'blessed';
+import * as contrib from 'blessed-contrib';
 
 import { Screen } from './screen';
 
@@ -44,6 +45,15 @@ export class TerminalRenderer implements Renderer2 {
   }
 
   appendChild(parent: Widgets.BlessedElement, newChild: Widgets.BlessedElement): void {
+    if (newChild instanceof contrib.grid) {
+      return;
+    }
+
+    if (parent instanceof contrib.grid) {
+      (newChild as any).appendTo(parent);
+      return;
+    }
+
     if (newChild) {
       parent.append(newChild);
     }
@@ -58,7 +68,7 @@ export class TerminalRenderer implements Renderer2 {
   insertBefore(parent: any, newChild: any, refChild: any): void {
   }
 
-  listen(target: 'window' | 'document' | 'body' | any, eventName: string, callback: (event: any) => (boolean | void)): () => void {
+  listen(target: Widgets.BlessedElement, eventName: string, callback: (event: any) => (boolean | void)): () => void {
     target.on('click', callback);
     return function () {
     };
@@ -89,8 +99,6 @@ export class TerminalRenderer implements Renderer2 {
   setProperty(el: Widgets.BlessedElement, name: string, value: any): void {
     if (name === 'styles') {
       name = 'style';
-    } else if (name === 'data' && value) {
-      (<any>el).setData(value);
     } else {
       el[name] = value;
     }

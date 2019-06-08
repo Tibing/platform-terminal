@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     <!--<pt-3-text-in-draggable-box></pt-3-text-in-draggable-box>-->
     <!--<pt-4-table></pt-4-table>-->
     <!--<pt-5-line-chart></pt-5-line-chart>-->
+    <!--<pt-6-dashboard></pt-6-dashboard>-->
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

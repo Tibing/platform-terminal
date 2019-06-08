@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as blessed from 'blessed';
 import { Widgets } from 'blessed';
-import * as contrib from 'blessed-contrib';
 
-type ElementFactory = (any) => Widgets.BoxElement;
+import { ElementFactory, elementsFactory } from './elements-registry';
 
-const elementsFactory: Map<string, ElementFactory> = new Map()
-  .set('text', blessed.text)
-  .set('box', blessed.box)
-  .set('table', blessed.table)
-  .set('line', contrib.line);
 
 @Injectable()
 export class Screen {
@@ -26,7 +20,7 @@ export class Screen {
       elementFactory = elementsFactory.get('box');
     }
 
-    return elementFactory(options);
+    return elementFactory({ ...options, screen: this.screen });
   }
 
   selectRootElement(): Widgets.Screen {

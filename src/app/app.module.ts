@@ -9,6 +9,10 @@ import { TextInBoxComponent } from './2-text-in-box/2-text-in-box.component';
 import { TextInDraggableBoxComponent } from './3-text-in-draggable-box/3-text-in-draggable-box.component';
 import { TableComponent } from './4-table/4-table.component';
 import { LineChartComponent } from './5-line-chart/5-line-chart.component';
+import { DashboardComponent } from './6-dashboard/6-dashboard.component';
+import { SparklineService } from './sparkline.service';
+import { ServerUtilizationService } from './server-utilization.service';
+import { ProcessManagerService } from './process-manager.service';
 
 @NgModule({
   declarations: [
@@ -18,6 +22,7 @@ import { LineChartComponent } from './5-line-chart/5-line-chart.component';
     TextInDraggableBoxComponent,
     TableComponent,
     LineChartComponent,
+    DashboardComponent,
   ],
   imports: [
     TerminalModule,
@@ -25,6 +30,9 @@ import { LineChartComponent } from './5-line-chart/5-line-chart.component';
   ],
   providers: [
     TransactionsService,
+    SparklineService,
+    ServerUtilizationService,
+    ProcessManagerService,
   ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA],
