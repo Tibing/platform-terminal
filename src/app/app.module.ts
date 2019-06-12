@@ -6,10 +6,7 @@ import { TerminalModule } from './terminal/terminal.module';
 import { TransactionsService } from './transactions.service';
 import { PlainTextComponent } from './1-plain-text/1-plain-text.component';
 import { TextInBoxComponent } from './2-text-in-box/2-text-in-box.component';
-import { TextInDraggableBoxComponent } from './3-text-in-draggable-box/3-text-in-draggable-box.component';
-import { TableComponent } from './4-table/4-table.component';
-import { LineChartComponent } from './5-line-chart/5-line-chart.component';
-import { DashboardComponent } from './6-dashboard/6-dashboard.component';
+import { DashboardComponent } from './3-dashboard/3-dashboard.component';
 import { SparklineService } from './sparkline.service';
 import { ServerUtilizationService } from './server-utilization.service';
 import { ProcessManagerService } from './process-manager.service';
@@ -19,9 +16,6 @@ import { ProcessManagerService } from './process-manager.service';
     AppComponent,
     PlainTextComponent,
     TextInBoxComponent,
-    TextInDraggableBoxComponent,
-    TableComponent,
-    LineChartComponent,
     DashboardComponent,
   ],
   imports: [

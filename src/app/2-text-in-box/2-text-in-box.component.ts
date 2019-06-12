@@ -5,11 +5,11 @@ import { Component } from '@angular/core';
   template: `
     <box top="center"
          left="center"
-         height="50%"
-         width="50%"
+         height="5"
+         width="21"
          [style]="style">
-      <box top="5" left="7" [style]="style">
-        More elements!!!
+      <box top="2" left="1" [style]="style">
+        BOXES ARE BORING!
       </box>
     </box>
   `,

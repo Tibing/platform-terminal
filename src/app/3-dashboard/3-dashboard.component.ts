@@ -6,7 +6,7 @@ import { ServerUtilizationService } from '../server-utilization.service';
 import { ProcessManagerService } from '../process-manager.service';
 
 @Component({
-  selector: 'pt-6-dashboard',
+  selector: 'pt-3-dashboard',
   template: `
     <grid rows="12" cols="12">
       <line
