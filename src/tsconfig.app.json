@@ -3,7 +3,15 @@
   "compilerOptions": {
     "outDir": "../dist",
     "module": "commonjs",
-    "types": []
+    "types": [],
+    "paths": {
+      "platform-terminal": [
+        "dist/platform-terminal"
+      ],
+      "platform-terminal/*": [
+        "dist/platform-terminal/*"
+      ]
+    }
   },
   "exclude": [
     "src/test.ts",

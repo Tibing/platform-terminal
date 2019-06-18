@@ -1,3 +1,6 @@
+import 'core-js/es7/reflect';
+import 'zone.js/dist/zone-node';
+
 import { COMPILER_OPTIONS, createPlatformFactory, Sanitizer } from '@angular/core';
 import { ɵplatformCoreDynamic as platformCoreDynamic } from '@angular/platform-browser-dynamic';
 import { DOCUMENT } from '@angular/common';

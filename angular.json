@@ -121,6 +121,41 @@
           }
         }
       }
+    },
+    "platform-terminal": {
+      "root": "projects/platform-terminal",
+      "sourceRoot": "projects/platform-terminal/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/platform-terminal/tsconfig.lib.json",
+            "project": "projects/platform-terminal/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/platform-terminal/src/test.ts",
+            "tsConfig": "projects/platform-terminal/tsconfig.spec.json",
+            "karmaConfig": "projects/platform-terminal/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/platform-terminal/tsconfig.lib.json",
+              "projects/platform-terminal/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-console"

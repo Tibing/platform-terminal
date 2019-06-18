@@ -11,4 +11,7 @@ Repository contains demo application that renders full-featured dashboard with c
 - `git clone git@github.com:Tibing/platform-terminal.git`
 - `cd platform-terminal`
 - `npm install`
-- `npm start`
+- `ng build platform-terminal`
+- `cd dist/platform-terminal`
+- `npm link`
+- `npm link platform-terminal` in the project root
