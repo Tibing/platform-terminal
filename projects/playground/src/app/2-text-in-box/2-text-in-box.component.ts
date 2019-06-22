@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'pt-2-text-in-box',
+  selector: 'pl-2-text-in-box',
   template: `
     <box top="center"
          left="center"
