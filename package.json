@@ -11,7 +11,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "npm run link:platform"
+    "postinstall": "npm run build:platform && npm run link:platform"
   },
   "private": true,
   "dependencies": {
