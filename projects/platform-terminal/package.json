@@ -4,5 +4,6 @@
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0"
-  }
+  },
+  "builders": "./src/lib/builder/builders.json"
 }

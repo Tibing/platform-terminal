@@ -1,0 +1,10 @@
+{
+  "$schema": "@angular-devkit/architect/src/builders-schema.json",
+  "builders": {
+    "terminal": {
+      "implementation": "./terminal/index.js",
+      "schema": "./terminal/schema.json",
+      "description": "Terminal Builder"
+    }
+  }
+}
