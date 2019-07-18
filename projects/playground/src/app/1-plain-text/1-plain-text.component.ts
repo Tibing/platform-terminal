@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'pl-1-plain-text',
+  selector: 'pl-plain-text',
   template: `
     Folks, you're awesome!
   `,

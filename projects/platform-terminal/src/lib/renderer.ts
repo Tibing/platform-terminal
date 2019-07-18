@@ -1,6 +1,5 @@
 import { Injectable, Renderer2, RendererFactory2, RendererStyleFlags2, RendererType2 } from '@angular/core';
 import { Widgets } from 'blessed';
-import * as contrib from 'blessed-contrib';
 
 import { Screen } from './screen';
 
@@ -45,14 +44,6 @@ export class TerminalRenderer implements Renderer2 {
   }
 
   appendChild(parent: Widgets.BlessedElement, newChild: Widgets.BlessedElement): void {
-    if (newChild instanceof contrib.grid) {
-      return;
-    }
-
-    if (parent instanceof contrib.grid) {
-      (newChild as any).appendTo(parent);
-      return;
-    }
 
     if (newChild) {
       parent.append(newChild);
