@@ -27,10 +27,11 @@ function createTerminal(schema: TerminalSchema, context: BuilderContext): Observ
 function createTransforms(): Transforms {
   return {
     webpackConfiguration(input: Configuration) {
-
       input.target = 'node';
-      input.plugins.push(new webpack.IgnorePlugin({ resourceRegExp: /^term.js|pty.js$/ }));
-      input.sourceMap = false;
+      input.plugins = [
+        ...input.plugins.filter(plugin => !(plugin instanceof webpack.SourceMapDevToolPlugin)),
+        new webpack.IgnorePlugin({ resourceRegExp: /^term.js|pty.js$/ }),
+      ];
 
       delete input.entry.polyfills;
       delete input.optimization.runtimeChunk;
