@@ -11,7 +11,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "npm run link:platform"
+    "postinstall": "npm run build:platform && npm run link:platform"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +26,6 @@
     "@angular/router": "~8.0.0",
     "@types/blessed": "^0.1.10",
     "blessed": "^0.1.81",
-    "blessed-contrib": "^4.8.11",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.2",
     "tslib": "^1.9.0",

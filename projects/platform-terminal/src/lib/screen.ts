@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as blessed from 'blessed';
 import { Widgets } from 'blessed';
 
-import { ElementFactory, elementsFactory } from './elements-registry';
+import { ElementFactory, elementsFactories } from './elements-registry';
 
 
 @Injectable()
@@ -13,11 +13,11 @@ export class Screen {
     this.init();
   }
 
-  createElement(name: string, options: any = {}): Widgets.BoxElement {
-    let elementFactory: ElementFactory = elementsFactory.get(name);
+  createElement(name: string, options: any = {}): Widgets.BlessedElement {
+    let elementFactory: ElementFactory = elementsFactories.get(name);
 
     if (!elementFactory) {
-      elementFactory = elementsFactory.get('box');
+      elementFactory = elementsFactories.get('box');
     }
 
     return elementFactory({ ...options, screen: this.screen });

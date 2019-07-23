@@ -1,20 +1,13 @@
-import * as blessed from 'blessed';
 import { Widgets } from 'blessed';
-import * as contrib from 'blessed-contrib';
+import * as blessed from 'blessed';
 
-import { gridFactory } from './adapters/grid-adapter';
-import { deferredElement } from './adapters/deferred';
+import { layoutAdapter } from './adapters/layout';
 
-export type ElementFactory = (any) => Widgets.BoxElement;
+export type ElementFactory = (any) => Widgets.BlessedElement;
 
-export const elementsFactory: Map<string, ElementFactory> = new Map()
+export const elementsFactories: Map<string, ElementFactory> = new Map()
+  .set('layout', layoutAdapter)
   .set('text', blessed.text)
   .set('box', blessed.box)
-  .set('table', blessed.table)
-  .set('line', deferredElement(contrib.line))
-  .set('sparkline', deferredElement(contrib.sparkline))
-  .set('bar', deferredElement(contrib.bar))
-  .set('table', deferredElement(contrib.table))
-  .set('map', deferredElement(contrib.map))
-  .set('grid', gridFactory);
+  .set('line', blessed.line);
 
