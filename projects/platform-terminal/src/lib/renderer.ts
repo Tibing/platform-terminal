@@ -44,10 +44,7 @@ export class TerminalRenderer implements Renderer2 {
   }
 
   appendChild(parent: Widgets.BlessedElement, newChild: Widgets.BlessedElement): void {
-
-    if (newChild) {
-      parent.append(newChild);
-    }
+    parent.append(newChild);
   }
 
   createComment(value: string): any {
