@@ -9,5 +9,7 @@ export const elementsFactories: Map<string, ElementFactory> = new Map()
   .set('layout', layoutAdapter)
   .set('text', blessed.text)
   .set('box', blessed.box)
-  .set('line', blessed.line);
+  .set('line', blessed.line)
+  .set('log', blessed.log)
+  .set('listbar', blessed.listbar);
 
