@@ -25,4 +25,8 @@ export const elementPropertyDecorators: Map<string, Map<string, ElementPropertyD
   .set('table', new Map([
     ['rows', (element: Widgets.TableElement, name, value) => element.setRows(value)],
     ['data', (element: Widgets.TableElement, name, value) => element.setData(value)],
+  ]))
+  .set('listbar', new Map([
+    ['items', (element: Widgets.ListbarElement, name, value) => { element.setItems(value); }],
+    ['commands', (element: Widgets.ListbarElement, name, value) => { element.setItems(value); }],
   ]));
