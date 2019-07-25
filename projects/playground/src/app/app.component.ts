@@ -5,8 +5,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'pl-root',
   template: `
   <layout>
-    <pl-plain-text width="50%"></pl-plain-text>
-    <pl-text-in-box width="50%"></pl-text-in-box>
+    <pl-text-example width="25%" height="50%"></pl-text-example>
+    <pl-box-example width="25%" height="50%"></pl-box-example>
+    <pl-table-example width="25%" height="50%"></pl-table-example>
+    <pl-progressbar-example width="25%" height="50%"></pl-progressbar-example>
   </layout>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

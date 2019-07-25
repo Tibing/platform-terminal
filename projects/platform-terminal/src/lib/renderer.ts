@@ -2,6 +2,7 @@ import { Injectable, Renderer2, RendererFactory2, RendererStyleFlags2, RendererT
 import { Widgets } from 'blessed';
 
 import { Screen } from './screen';
+import { elementPropertyDecorators } from './elements-registry';
 
 
 @Injectable()
@@ -57,8 +58,10 @@ export class TerminalRenderer implements Renderer2 {
   }
 
   listen(target: Widgets.BlessedElement, eventName: string, callback: (event: any) => (boolean | void)): () => void {
-    target.on('click', callback);
+    target.on(eventName, callback);
+
     return function () {
+      target.removeListener(eventName, callback);
     };
   }
 
@@ -81,12 +84,14 @@ export class TerminalRenderer implements Renderer2 {
   }
 
   setAttribute(el: Widgets.BlessedElement, name: string, value: string, namespace?: string | null): void {
-    el[name] = value;
+    this.setProperty(el, name, value);
   }
 
   setProperty(el: Widgets.BlessedElement, name: string, value: any): void {
-    if (name === 'styles') {
-      name = 'style';
+    const elementProperties = elementPropertyDecorators.get(el.type);
+
+    if (elementProperties && elementProperties.has(name)) {
+      elementProperties.get(name)(el, name, value);
     } else {
       el[name] = value;
     }

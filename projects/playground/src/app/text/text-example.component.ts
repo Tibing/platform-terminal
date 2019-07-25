@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'pl-plain-text',
+  selector: 'pl-text-example',
   template: `
     Folks, you're awesome!
   `,
 })
-export class PlainTextComponent {
+export class TextExampleComponent {
 }
