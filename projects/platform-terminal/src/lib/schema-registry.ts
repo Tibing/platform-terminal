@@ -10,7 +10,6 @@ export class TerminalElementSchemaRegistry extends ElementSchemaRegistry {
     return true;
   }
 
-
   getMappedPropName(propName: string): string {
     return propName;
   }

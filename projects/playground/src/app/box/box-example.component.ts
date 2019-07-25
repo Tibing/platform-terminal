@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'pl-text-in-box',
+  selector: 'pl-box-example',
   template: `
     <box top="center"
          left="center"
@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
     </box>
   `,
 })
-export class TextInBoxComponent {
+export class BoxExampleComponent {
   style = {
     fg: 'white',
     bg: 'green',
