@@ -33,6 +33,9 @@ function createTransforms(): Transforms {
         new webpack.IgnorePlugin({ resourceRegExp: /^term.js|pty.js$/ }),
       ];
 
+      input.output.library = 'libpack';
+      input.output.libraryTarget = 'umd';
+
       delete input.entry.polyfills;
       delete input.optimization.runtimeChunk;
       delete input.optimization.splitChunks;
