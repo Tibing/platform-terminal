@@ -10,9 +10,10 @@ export const elementFactories: Map<string, ElementFactory> = new Map()
   .set('text', blessed.text)
   .set('box', blessed.box)
   .set('line', blessed.line)
+  .set('log', blessed.log)
+  .set('listbar', blessed.listbar)
   .set('progressbar', blessed.progressbar)
   .set('table', blessed.table);
-
 
 export type ElementPropertyDecorator = (element: Widgets.BlessedElement, name: string, value: any) => any;
 
