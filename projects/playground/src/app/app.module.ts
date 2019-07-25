@@ -3,28 +3,23 @@ import { CommonModule } from '@angular/common';
 import { TerminalModule } from 'platform-terminal';
 
 import { AppComponent } from './app.component';
-import { TransactionsService } from './transactions.service';
-import { PlainTextComponent } from './1-plain-text/1-plain-text.component';
-import { TextInBoxComponent } from './2-text-in-box/2-text-in-box.component';
-import { SparklineService } from './sparkline.service';
-import { ServerUtilizationService } from './server-utilization.service';
-import { ProcessManagerService } from './process-manager.service';
+
+import { TextExampleComponent } from './text/text-example.component';
+import { BoxExampleComponent } from './box/box-example.component';
+import { TableExampleComponent } from './table/table-example.component';
+import { ProgressbarExampleComponent } from './progressbar/progressbar-example.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlainTextComponent,
-    TextInBoxComponent,
+    TextExampleComponent,
+    BoxExampleComponent,
+    TableExampleComponent,
+    ProgressbarExampleComponent,
   ],
   imports: [
     TerminalModule,
     CommonModule,
-  ],
-  providers: [
-    TransactionsService,
-    SparklineService,
-    ServerUtilizationService,
-    ProcessManagerService,
   ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA],
