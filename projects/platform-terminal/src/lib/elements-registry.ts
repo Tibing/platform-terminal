@@ -1,10 +1,11 @@
-import { Widgets } from 'blessed';
 import * as blessed from 'blessed';
+import { Widgets } from 'blessed';
 
 import { layoutAdapter } from './adapters/layout';
 import { boxAdapter } from './adapters/box';
 import { listbarAdapter } from './adapters/listbar';
 import { tableAdapter } from './adapters/table';
+import { logAdapter } from './adapters/log';
 
 export type ElementFactory = (any) => Widgets.BlessedElement;
 
@@ -13,7 +14,7 @@ export const elementFactories: Map<string, ElementFactory> = new Map()
   .set('text', blessed.text)
   .set('box', boxAdapter)
   .set('line', blessed.line)
-  .set('log', blessed.log)
+  .set('log', logAdapter)
   .set('listbar', listbarAdapter)
   .set('progressbar', blessed.progressbar)
   .set('table', tableAdapter);
@@ -30,11 +31,18 @@ export const elementPropertyDecorators: Map<string, Map<string, ElementPropertyD
     ['data', (element: Widgets.TableElement, name, value) => element.setData(value)],
   ]))
   .set('listbar', new Map([
-    ['items', (element: Widgets.ListbarElement, name, value) => { element.setItems(value); }],
-    ['commands', (element: Widgets.ListbarElement, name, value) => { element.setItems(value); }],
+    ['items', (element: Widgets.ListbarElement, name, value) => {
+      element.setItems(value);
+    }],
+    ['commands', (element: Widgets.ListbarElement, name, value) => {
+      element.setItems(value);
+    }],
     ['label', (element: Widgets.ListbarElement, name, value) => element.setLabel(value)],
   ]))
   .set('box', new Map([
     ['content', (element: Widgets.BoxElement, name, value) => element.setContent(value)],
     ['label', (element: Widgets.BoxElement, name, value) => element.setLabel(value)],
+  ]))
+  .set('log', new Map([
+    ['log', (element: Widgets.Log, name, value) => element.log(value)],
   ]));
