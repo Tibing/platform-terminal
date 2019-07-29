@@ -1,17 +1,9 @@
 import * as blessed from 'blessed';
 import { Widgets } from 'blessed';
+import { scrollOptions } from './scroll-options';
 
 const defaultOptions: Widgets.LogOptions = {
-  scrollable: true,
-  input: true,
-  alwaysScroll: true,
-  scrollbar: {
-    ch: ' ',
-    inverse: true,
-  } as any,
-  keys: true,
-  vi: true,
-  mouse: true,
+  ...scrollOptions,
 };
 
 export function logAdapter(options?: Widgets.LogOptions) {

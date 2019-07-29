@@ -3,6 +3,7 @@ import { Widgets } from 'blessed';
 
 const defaultOptions: Partial<Widgets.ListbarOptions> = {
   tags: true,
+  autoCommandKeys: true,
   border: { type: 'line' },
 };
 
