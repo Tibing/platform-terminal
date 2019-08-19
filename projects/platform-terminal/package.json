@@ -1,10 +1,10 @@
 {
   "name": "platform-terminal",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
-    "core-js": "2.5.7",
+    "reflect-metadata": "0.1.13",
     "filesize": "^4.1.2",
     "inspectpack": "^4.2.1"
   }

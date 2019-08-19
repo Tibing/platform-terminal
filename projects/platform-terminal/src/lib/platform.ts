@@ -1,4 +1,4 @@
-import 'core-js/es7/reflect';
+import 'reflect-metadata';
 import 'zone.js/dist/zone-node';
 
 import { COMPILER_OPTIONS, createPlatformFactory, Sanitizer } from '@angular/core';
