@@ -1,12 +1,15 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist",
-    "module": "commonjs",
+    "module": "CommonJS",
+    "outDir": "../../dist/playground",
     "types": []
   },
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts"
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "projects/playground/src/**/*.d.ts"
   ]
 }
