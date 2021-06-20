@@ -5,13 +5,13 @@
     "ng": "ng",
     "build:platform": "ng build platform-terminal",
     "link:platform": "npm link dist/platform-terminal && npm link platform-terminal",
-    "start": "npm run build && node dist/projects/playground/src/main.js",
+    "start": "npm run build && node dist/playground/main.js",
     "debug": "npm run build && node --inspect-brk dist/projects/playground/src/main.js",
     "build": "ngc -p projects/playground/tsconfig.app.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "npm run link:platform"
+    "postinstall": "npm run build:platform && npm run link:platform"
   },
   "private": true,
   "dependencies": {
